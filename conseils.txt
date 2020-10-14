@@ -1,0 +1,31 @@
+DETECTION DES COINS 
+
+Détection des coutours de la feuille avec méthode de Canny et des gradients d'intensité + détecteur de Harris. 
+Le gradient indique une orientation et une amplitude aussi. C'est une méthode statistique.
+On mesure à quel point les gradients sont ou ne sont pas d'accords entre eux -> matrice de covariance des gradients.
+On va faire une analyse de cette matrice -> déterminant + trace de la matrice. On obtient une probabilité de la présence d'un coin
+
+Ce seul détecteur ne suffit pas à cause des motifs sur la table. On combine donc deux détecteurs entre eux pour que ça soit plus efficace.
+
+On met donc en place une méthode supervisée pour notre algo : on donne approximativement a position des 4 coins de la feuille sur notre image, puis on part de ces positions
+et on met en place une méthode de "poursuite" des coins. Ensuite on cherche avec le détecteur de Harris la valeur maximale dans l'entourage de ces 4 points.
+On a donc besoin d'une grande fenêtre de recherche pour trouver les coins, mais le soucis c'est qu'on peut se faire happer par autre chose qu'un coin.
+
+Pour éviter ça on va essayer de faire une projection linéaire de trajectoire
+
+
+
+REMPLACEMENT DE CONTENU
+
+Pour déterminer la transformation homographique de l'image il faut connaître 4 coins de notre image. Cette transformation est unique.
+Pour résoudre ça on fait une méthode des moindres carrés.
+
+La transformation n'est aps parfaite car notre image est discrète et le monde réelle est analogique.
+
+Pour transformer l'image on s'intéresse à l'image d'arrivée et on calcule comment on modifie l'image source pour qu'elle colle à l'arrivée.
+
+Comme la main est toujours la même au même endroit, on va construire un modèle colorimétrique de feuille pour pouvoir la détecter et ne pas l'écraser.
+Dès qu'un pixel n'est pas un pixel de feuille, alors c'est un pixel de main donc on ne l'écrase pas.
+
+Pour la 3D : la feuille définit un repaire plan, et les légos permettes de définir une 3e dimension. Du coup on va suivre les légos avec le travail du binôme 1,
+et transformer une image 3D en 2D pour que ça rende bien. On a besoin du coup de 6 points normalement pour réussir ça.
