@@ -24,6 +24,9 @@ D1 = Detecteur(luminance, 3);
 D2 = Detecteur(luminance, 5);
 D = min(D1 .* abs(D2), D2 .* abs(D1));
 
-simpleCol = [0, 0.8, 0.9, 1]';
+%% Seuillage du signal
+test = SeuillageCoins(D);
+
+simpleCol = [0, 0.5, 1]';
 map = cat(2, simpleCol, simpleCol, simpleCol);
-figure, imagesc(D, [0 1]), colormap(map);
+figure, imagesc(test, [0 1]), colormap(map);

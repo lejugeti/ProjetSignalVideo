@@ -2,6 +2,7 @@ clc
 
 video = VideoReader('video.mp4');
 frame1 = read(video, 1);
+
 dimImg = size(frame1);
 %test = rgb2gray(frame1);
 img = rgb2ycbcr(frame1);
@@ -22,6 +23,10 @@ pointDroiteBas = [1428 580];
 D1 = Detecteur(luminance, 3);
 D2 = Detecteur(luminance, 5);
 D = min(D1 .* abs(D2), D2 .* abs(D1));
+
+%% Seuillage du signal
+seuilCoin = 10^2;
+seuilBord = -1 * 10^2;
 
 simpleCol = [0, 0.8, 0.9, 1]';
 map = cat(2, simpleCol, simpleCol, simpleCol);
