@@ -3,7 +3,9 @@ clc
 video = VideoReader('video.mp4');
 frame1 = read(video, 1);
 dimImg = size(frame1);
-test = rgb2gray(frame1);
+%test = rgb2gray(frame1);
+img = rgb2ycbcr(frame1);
+Y = img(:,:,1);
 
 R = frame1(:,:,1);
 G = frame1(:,:,2);
@@ -18,24 +20,24 @@ pointDroiteBas = [1428 580];
 n = 50;
 bornes = 10;
 [X,Y] = meshgrid(linspace(-bornes, bornes, n), linspace(-bornes, bornes, n));
-sigmaGradient = 1;
-sigmaCov = 0.05;
+
+sigmaCov = 3;
 lambda = 0.05;
 
-denominateurFiltreGaussien = 2 * pi * sigma^2;
+
 denominateurDerivee = 2 * pi * sigma^4;
 exposant = (X.^2 + Y.^2)/(2*sigma^2);
 
-filtre_gaussien = (1 / denominateurFiltreGaussien) * exp(-exposant);
-Gx = (-1 * X / denominateurDerivee) .* exp(-exposant);
+G = FiltreG(X, Y);
+
 Gy = (-1 * Y / denominateurDerivee) .* exp(-exposant);
 %figure, subplot(1,2,1), surf(X,Y,Gx);
 %subplot(1,2,2), surf(X,Y,Gy);
 
 %Ix = ConvRGB(frame1, Gx);
 %Iy = ConvRGB(frame1, Gy);
-Ix = conv2(test, Gx, 'same');
-Iy = conv2(test, Gy, 'same');
+Ix = conv2(Y, Gx, 'same');
+Iy = conv2(Y, Gy, 'same');
 
 %Cxx = ConvRGB((Ix .* Ix),  filtre_gaussien);
 %Cxy = ConvRGB((Ix .* Iy),  filtre_gaussien);
