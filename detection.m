@@ -2,7 +2,7 @@ clc
 
 video = VideoReader('video.mp4');
 frame1 = read(video, 1);
-%imshow(frame1);
+imshow(frame1);
  
 pointGaucheHaut = [685 411];
 pointGaucheBas = [630 762];
