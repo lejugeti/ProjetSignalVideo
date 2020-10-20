@@ -19,29 +19,10 @@ pointGaucheBas = [630 762];
 pointDroiteHaut = [1339 238];
 pointDroiteBas = [1428 580];
 
-n = 50;
-bornes = 10;
-[X,Y] = meshgrid(linspace(-bornes, bornes, n), linspace(-bornes, bornes, n));
+D1 = Detecteur(luminance, 3);
+D2 = Detecteur(luminance, 5);
+D = min(D1 .* abs(D2), D2 .* abs(D1));
 
-lambda = 0.05;
-
-G = FiltreG(X, Y, 3);
-Gx = FiltreDeriveeG(X, Y, 'X');
-Gy = FiltreDeriveeG(X, Y, 'Y');
-%figure, subplot(1,2,1), surf(X,Y,Gx);
-%subplot(1,2,2), surf(X,Y,Gy);
-
-Ix = conv2(luminance, Gx, 'same');
-Iy = conv2(luminance, Gy, 'same');
-
-%Cxx = ConvRGB((Ix .* Ix),  filtre_gaussien);
-%Cxy = ConvRGB((Ix .* Iy),  filtre_gaussien);
-%Cyy = ConvRGB((Iy .* Iy),  filtre_gaussien);
-Cxx = conv2((Ix .* Ix),  G, 'same');
-Cxy = conv2((Ix .* Iy),  G, 'same');
-Cyy = conv2((Iy .* Iy),  G, 'same');
-
-D = Cxx .* Cyy - Cxy .* Cxy - (lambda .* (Cxx + Cyy).^2);
-newImg = cat(3, D, Cb, Cr); 
-%figure,imshow(frame1);
-figure, imagesc(D), colormap('gray');
+simpleCol = [0, 0.8, 0.9, 1]';
+map = cat(2, simpleCol, simpleCol, simpleCol);
+figure, imagesc(D, [0 1]), colormap(map);
