@@ -2,6 +2,7 @@ clc
 
 video = VideoReader('video.mp4');
 frame1 = read(video, 1);
+
 dimImg = size(frame1);
 %test = rgb2gray(frame1);
 img = rgb2ycbcr(frame1);

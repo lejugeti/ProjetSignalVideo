@@ -6,3 +6,6 @@ sigma = 2;
 denominateur = 2 * pi * sigma*sigma;
 exposant = (X*X + Y*Y)/2*sigma*sigma;
 filtre_gaussien = (1 / denominateur) * exp(-exposant);
+
+% 1920 pixels en X -> centre = 960
+% 1080 pixels en Y -> centre 540
