@@ -1,3 +1,4 @@
+clear all
 clc
 
 video = VideoReader('video.mp4');
@@ -24,6 +25,16 @@ D1 = Detecteur(luminance, 3);
 D2 = Detecteur(luminance, 5);
 D = min(D1 .* abs(D2), D2 .* abs(D1));
 
+%%
+W = 37; %zone de pixels dans laquelle on va chercher les coins
+X = 40;
+Y = 40;
+Xmin = X - (W-1)/2;
+Xmax = X + (W-1)/2;
+Ymin = Y - (W-1)/2;
+Ymax = Y + (W-1)/2;
+
+img = DecoupeImagette(luminance, [500,500]);
 %% Seuillage du signal
 test = SeuillageCoins(D);
 
