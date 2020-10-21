@@ -1,4 +1,4 @@
-function [ D ] = Detecteur( lum )
+function [ D ] = DetecteurRobuste( lum )
 % Renvoie une image traitée par un détecteur de Harris robuste, c'est à
 % dire en combinant deux détecteur avec une dispersion des filtres
 % différentes.
