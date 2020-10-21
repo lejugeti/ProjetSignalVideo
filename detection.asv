@@ -2,8 +2,8 @@ clear all
 clc
 
 video = VideoReader('video.mp4');
-frame1 = read(video, 1);
-%frame2 = read(video, 201);
+frame1 = read(video, 200);
+frame2 = read(video, 201);
 
 dimImg = size(frame1);
 img = rgb2ycbcr(frame1);
@@ -11,7 +11,10 @@ luminance = img(:,:,1);
 Cb = img(:,:,2);
 Cr = img(:,:,2);
 
-%imshow(frame1);
+figure
+imshow(frame1);
+figure
+imshow(frame2);
 
 pointGaucheHaut1 = [685 411];
 pointGaucheBas1 = [630 762];
@@ -23,8 +26,8 @@ pointGaucheBas2 = [630 762];
 pointDroiteHaut2 = [1339 238];
 pointDroiteBas2 = [1428 580];
 
-D1 = DetecteurHarris(luminance, 3);
-D2 = DetecteurHarris(luminance, 5);
+D1 = Detecteur(luminance, 3);
+D2 = Detecteur(luminance, 5);
 D = min(D1 .* abs(D2), D2 .* abs(D1));
 
 %%
