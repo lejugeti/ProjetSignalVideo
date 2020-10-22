@@ -12,40 +12,20 @@ Cr = img(:,:,2);
 
 %imshow(frame1);
 
-pointGaucheHaut1 = [685 411];
-pointGaucheBas1 = [630 762];
-pointDroiteHaut1 = [1339 238];
-pointDroiteBas1 = [1428 580];
+pointGaucheHaut1 = [685, 411];
+pointGaucheBas1 = [630, 762];
+pointDroiteHaut1 = [1339, 238];
+pointDroiteBas1 = [1428, 580];
 
-pointGaucheHaut2 = [685 411];
-pointGaucheBas2 = [630 762];
-pointDroiteHaut2 = [1339 238];
-pointDroiteBas2 = [1428 580];
+pointGaucheHaut2 = [685, 411];
+pointGaucheBas2 = [630, 762];
+pointDroiteHaut2 = [1339, 238];
+pointDroiteBas2 = [1428, 580];
 
 % D1 = DetecteurHarris(luminance, 3);
 % D2 = DetecteurHarris(luminance, 5);
 % D = min(D1 .* abs(D2), D2 .* abs(D1));
 D = DetecteurRobuste(luminance);
-%% tests détection de coin
-clc
-
-W = 37;
-ajoutFenetre = 100;
-
-R = frame1(:,:,1);
-G = frame1(:,:,2);
-B = frame1(:,:,3);
-
-P1 = Point(685, 411);
-P2 = Point(685,411);
-
-newCoin = SuiviCoin(frame1, P1, P2);
-x = newCoin(1);
-y = newCoin(2);
-G(y-5:y+5, x-5:x+5) = 0;
-B(y-5:y+5, x-5:x+5) = 0;
-newImg = cat(3, R,G,B);
-imshow(newImg);
 
 %% Seuillage du signal
 test = SeuillageCoins(D);
@@ -61,35 +41,45 @@ clc
 warning('off');
 
 reader = VideoReader('video.mp4');
-writer = VideoWriter('new_vid_fenetre100_gradientTaille10.mp4');
+writer = VideoWriter('new_vid_fenetre100_gradientTaille20');
 writer.FrameRate = reader.FrameRate;
 open(writer);
 
-P1 = Point(685, 411);
-P2 = Point(685,411);
+P1GH = Point(685, 411);
+P2GH = Point(685,411);
+P1GB = Point(630, 762);
+P2GB = Point(630, 762);
+P1DH = Point(1339, 238);
+P2DH = Point(1339, 238);
+P1DB = Point(1428, 580);
+P2DB = Point(1428, 580);
 
-h = waitbar(0, 'Attendez svppppp');
+h = waitbar(0, 'Traitement de la vidéo en cours'); %barre de chargement pour le traitement des la vidéo
 i = 1;
 while i < reader.NumberOfFrames + 1
     img = read(reader, i); 
-    R = img(:,:,1);
-    G = img(:,:,2);
-    B = img(:,:,3);
+%     R = img(:,:,1);
+%     G = img(:,:,2);
+%     B = img(:,:,3);
+%     
+%     newCoinGH = SuiviCoin(img, P2GH, P1GH); %vecteur (1,2)
+%     x = newCoinGH(1);
+%     y = newCoinGH(2);
+%     G(y-5:y+5, x-5:x+5) = 0; %les coordonnées de l'image sont (y,x) 
+%     B(y-5:y+5, x-5:x+5) = 0;
+%     newImg = cat(3, R,G,B);
+%     
+%     
+%     P1GH = P2GH;
+%     P2GH = Point(x, y);
     
-    newCoin = SuiviCoin(img, P2, P1);
-    x = newCoin(1);
-    y = newCoin(2);
-    G(y-5:y+5, x-5:x+5) = 0;
-    B(y-5:y+5, x-5:x+5) = 0;
-    newImg = cat(3, R,G,B);
-    
-    P1 = P2;
-    P2 = Point(x, y);
-    
+    [newImg, P1GH, P2GH] = DessineCoinRouge(img, P1GH, P2GH);
+    [newImg, P1GB, P2GB] = DessineCoinRouge(newImg, P1GB, P2GB);
+    [newImg, P1DH, P2DH] = DessineCoinRouge(newImg, P1DH, P2DH);
+    [newImg, P1DB, P2DB] = DessineCoinRouge(newImg, P1DB, P2DB);
     writeVideo(writer, newImg);
     
     waitbar(i/(reader.NumberOfFrames+1));
-%     sprintf('progression : %f %',(i/reader.NumberOfFrames)*100);
     i = i + 1;
     
 end

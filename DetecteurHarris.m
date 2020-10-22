@@ -2,7 +2,7 @@ function [ D ] = DetecteurHarris( lum, sigmaCov )
 %Renvoie une image traitée avec le détecteur de Harris
 %On traite en entrée la luminance Y d'une image
 %sigmaCov correspond à la dispersion du filtre gaussient
-n = 20;
+n = 30;
 bornes = 10;
 [X,Y] = meshgrid(linspace(-bornes, bornes, n), linspace(-bornes, bornes, n));
 lambda = 0.05;
