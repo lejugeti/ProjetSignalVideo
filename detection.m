@@ -58,15 +58,17 @@ figure, imagesc(test, [0 1]), colormap(map);
 
 clear all
 clc
+warning('off');
 
 reader = VideoReader('video.mp4');
-writer = VideoWriter('new_vid.mp4');
+writer = VideoWriter('new_vid_fenetre100_gradientTaille10.mp4');
 writer.FrameRate = reader.FrameRate;
 open(writer);
 
 P1 = Point(685, 411);
 P2 = Point(685,411);
 
+h = waitbar(0, 'Attendez svppppp');
 i = 1;
 while i < reader.NumberOfFrames + 1
     img = read(reader, i); 
@@ -85,7 +87,12 @@ while i < reader.NumberOfFrames + 1
     P2 = Point(x, y);
     
     writeVideo(writer, newImg);
+    
+    waitbar(i/(reader.NumberOfFrames+1));
+%     sprintf('progression : %f %',(i/reader.NumberOfFrames)*100);
     i = i + 1;
+    
 end
 
+close(h);
 close(writer);
