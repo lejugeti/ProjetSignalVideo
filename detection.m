@@ -74,7 +74,7 @@ while i < reader.NumberOfFrames + 1
     G = img(:,:,2);
     B = img(:,:,3);
     
-    newCoin = SuiviCoin(img, P1, P2);
+    newCoin = SuiviCoin(img, P2, P1);
     x = newCoin(1);
     y = newCoin(2);
     G(y-5:y+5, x-5:x+5) = 0;
