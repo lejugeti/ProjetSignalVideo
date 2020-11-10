@@ -3,9 +3,8 @@ function [ G ] = FiltreDeriveeG(coordonnee)
 % coordonnee indique s'il faut créer ce filtre en X ou en Y
 
 sigma = 2;
-bornes = 3 * sigma;
-n = bornes * 2 + 1
-[X,Y] = meshgrid(-bornes:borne);
+
+[X,Y] = meshgrid(-3*sigma:3*sigma);
 
 if(coordonnee=='X')
     direction = X;

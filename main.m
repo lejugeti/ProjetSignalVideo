@@ -1,4 +1,4 @@
-%% test détection des coins
+%% remplacement d'image fonctionnel
 
 clear all
 clc
@@ -23,7 +23,7 @@ h = waitbar(0, 'Traitement de la vidéo en cours'); %barre de chargement pour le 
 i = 1;
 while i < reader.NumberOfFrames + 1
 
-    img = read(reader, i); 
+    frame = read(reader, i); 
 
     [P2GH, P1GH] = SuiviCoin(frame, P2GH, P1GH);
     
@@ -45,3 +45,4 @@ end
 
 close(h);
 close(writer);
+

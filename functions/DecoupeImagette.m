@@ -4,7 +4,6 @@ function [ img ] = DecoupeImagette( imageEntree, centre , ajoutFenetre)
 
 W = 37; %zone de pixels dans laquelle on va chercher les coins
 
-% [X, Y] = centre.Coord;
 
 X = centre.X;
 Y = centre.Y;

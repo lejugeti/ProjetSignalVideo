@@ -5,7 +5,7 @@ function [ coinNouveau, coinActuel] = SuiviCoin(img, coinActuel, coinAncien )
 
 img = rgb2ycbcr(img);
 lum = img(:,:,1);
-ajoutFenetre = 100; %pixels à ajouter pour découper l'imagette
+ajoutFenetre = 70; %pixels à ajouter pour découper l'imagette
 W = 37;
 
 estimation = EstimationNouveauCoin(coinActuel, coinAncien);
@@ -27,7 +27,7 @@ maxLum = max(max(D2));
 
 diffCentre = [yCoin, xCoin] - c;
 
-nouveauCoin = Point(coinActuel.X + diffCentre(2), coinActuel.Y + diffCentre(1));
+coinNouveau = Point(coinActuel.X + diffCentre(2), coinActuel.Y + diffCentre(1));
 
 end
 
