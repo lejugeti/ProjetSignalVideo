@@ -26,7 +26,7 @@ X1 = round(C(:,1)./C(:,3)); %coordonnées X transposées dans l'incruste
 Y1 = round(C(:,2)./C(:,3)); %coordonnées Y transposées dans l'incruste
 
 posFeuille = boolean((X1 > 0) .* (X1 <= lengthX) .* (Y1 > 0) .* (Y1 <= lengthY));
-posFeuille = boolean(SeuillageMain(frame, posFeuille, X1, Y1));
+posFeuille = boolean(SeuillageMain(frame, posFeuille, X1, Y1)); % position de la feuille sans la main
 
 indexFrame = find(posFeuille); % index à changer dans la frame
 indexImg = sub2ind([lengthY, lengthX], Y1(posFeuille), X1(posFeuille)); % index à prendre dans l'incruste

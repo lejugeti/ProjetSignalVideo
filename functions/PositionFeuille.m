@@ -4,10 +4,7 @@ function [posFeuille, X1, Y1] = PositionFeuille(frame, img, PGH, PGB, PDH, PDB)
 
 % les matrices contenant les points correspondant de l'incruste X1 et Y1
 
-d
-
-
-imensionsImg = size(img);
+dimensionsImg = size(img);
 
 lengthY = dimensionsImg(1);
 

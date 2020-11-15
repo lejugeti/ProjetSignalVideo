@@ -86,3 +86,24 @@ end
 
 close(h);
 close(writer);
+
+%% test seuillage main
+
+clear all
+clc
+warning('off');
+
+P1GH = Point(685, 411);
+P1GB = Point(630, 762);
+P1DH = Point(1339, 238);
+P1DB = Point(1428, 580);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,100);
+
+[posFeuille, X1, Y1] = PositionFeuille(frame, img, P1GH, P1GB, P1DH, P1DB);
+D = SeuillageMain(frame, posFeuille, X1, Y1);
+D = reshape(D, 1080, 1920);
+% D = D / 10^3;
+imagesc(D);

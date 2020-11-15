@@ -26,15 +26,10 @@ while i < reader.NumberOfFrames + 1
     frame = read(reader, i); 
 
     [P2GH, P1GH] = SuiviCoin(frame, P2GH, P1GH);
-    
     [P2GB, P1GB] = SuiviCoin(frame, P2GB, P1GB);
-    
     [P2DH, P1DH] = SuiviCoin(frame, P2DH, P1DH);
-    
     [P2DB, P1DB] = SuiviCoin(frame, P2DB, P1DB);
     
-    
-
     newFrame = ReplaceFeuille(frame, img, P2GH, P2GB, P2DH, P2DB);
     writeVideo(writer, newFrame);
     
