@@ -1,11 +1,11 @@
-function [ coinNouveau, coinActuel] = SuiviCoin(img, coinActuel, coinAncien )
+function [ coinNouveau, coinActuel] = SuiviCoin(frame, coinActuel, coinAncien )
 % Renvoie les coordonnées du nouveau coin après avoir été traité par un
 % détecteur de Harris. 
 % On passe en argument l'image à traiter ainsi que les couples [X Y] des coins actuel et ancien
 
-img = rgb2ycbcr(img);
-lum = img(:,:,1);
-ajoutFenetre = 70; %pixels à ajouter pour découper l'imagette
+frame = rgb2ycbcr(frame);
+lum = frame(:,:,1);
+ajoutFenetre = 40; %pixels à ajouter pour découper l'imagette
 W = 37;
 
 estimation = EstimationNouveauCoin(coinActuel, coinAncien);

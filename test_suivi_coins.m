@@ -4,7 +4,6 @@ clear all
 clc
 warning('off');
 
-img = imread('clown.jpg');
 reader = VideoReader('video.mp4');
 writer = VideoWriter('vid_detection');
 writer.FrameRate = reader.FrameRate;
@@ -27,15 +26,10 @@ while i < reader.NumberOfFrames + 1
     frame = read(reader, i); 
 
     [frame, P2GH, P1GH] = DessineCoinRouge(frame, P2GH, P1GH);
-    
     [frame, P2GB, P1GB] = DessineCoinRouge(frame, P2GB, P1GB);
-    
     [frame, P2DH, P1DH] = DessineCoinRouge(frame, P2DH, P1DH);
-    
     [newFrame, P2DB, P1DB] = DessineCoinRouge(frame, P2DB, P1DB);
     
-    
-
     %newFrame = ReplaceFeuille(frame, img, P2GH, P2GB, P2DH, P2DB);
     writeVideo(writer, newFrame);
     

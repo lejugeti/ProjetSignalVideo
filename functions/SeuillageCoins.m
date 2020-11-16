@@ -2,8 +2,8 @@ function [ signalSortie ] = SeuillageCoins( signal )
 %SEUILLAGECOINS Summary of this function goes here
 %   Detailed explanation goes here
 
-seuilCoin = 1 * 10^7;
-seuilBord = -1 * 10^7;
+seuilCoin = 6;
+seuilBord = -6;
 
 condCoin = signal > seuilCoin;
 condBord = signal < seuilBord;

@@ -6,7 +6,7 @@ warning('off');
 
 img = imread('clown.jpg');
 reader = VideoReader('video.mp4');
-writer = VideoWriter('new_vid');
+writer = VideoWriter('new_vid_test');
 writer.FrameRate = reader.FrameRate;
 open(writer);
 
