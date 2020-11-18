@@ -87,23 +87,45 @@ end
 close(h);
 close(writer);
 
-%% test seuillage main
+%% test homographie3D
 
 clear all
 clc
 warning('off');
 
-P1GH = Point(685, 411);
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(919, 475);
+
+img = imread('eponge.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,1);
+h = Homographie3D(PGH, PGB, PDH, PDB, PB1, PB2, 1, 1);
+
+[newFrame, X1, Y1] = ReplaceFeuille3D(frame, img, PGH, PGB, PDH, PDB, PB1, PB2);
+imshow(newFrame);
+
+%% test détection de coin seul 
+
+clear all
+clc
+warning('off');
+
+P1GH = Point(665, 411);
+P2GH = Point(665,411);
 P1GB = Point(630, 762);
+P2GB = Point(630, 762);
 P1DH = Point(1339, 238);
+P2DH = Point(1339, 238);
 P1DB = Point(1428, 580);
+P2DB = Point(1428, 580);
 
 img = imread('clown.jpg');
 reader = VideoReader('video.mp4');
-frame = read(reader,100);
+frame = read(reader,1);
 
-[posFeuille, X1, Y1] = PositionFeuille(frame, img, P1GH, P1GB, P1DH, P1DB);
-D = SeuillageMain(frame, posFeuille, X1, Y1);
-D = reshape(D, 1080, 1920);
-% D = D / 10^3;
-imagesc(D);
+[newFrame, ] = DessineCoinRouge(frame, P1GH, P2GH);
+imshow(newFrame);

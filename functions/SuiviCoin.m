@@ -5,6 +5,7 @@ function [ coinNouveau, coinActuel] = SuiviCoin(frame, coinActuel, coinAncien )
 
 frame = rgb2ycbcr(frame);
 lum = frame(:,:,1);
+
 ajoutFenetre = 40; %pixels à ajouter pour découper l'imagette
 W = 37;
 
