@@ -20,8 +20,8 @@ P1DB = Point(1428, 580);
 P2DB = Point(1428, 580);
 P1Bleu = Point(729, 552);
 P2Bleu = Point(729, 552);
-P1Blanc = Point(922, 475);
-P2Blanc = Point(922, 475);
+P1Blanc = Point(993, 433);
+P2Blanc = Point(993, 433);
 
 h = waitbar(0, 'Traitement de la vidéo en cours'); %barre de chargement pour le traitement des la vidéo
 i = 1;

@@ -4,8 +4,8 @@ function [ D ] = DetecteurRobuste( lum )
 % différentes.
 % On passe en argument la luminance d'une image RGB
 
-D1 = DetecteurHarris(lum, 3);
-D2 = DetecteurHarris(lum, 5);
+D1 = DetecteurHarris(lum, 3.2);
+D2 = DetecteurHarris(lum, 5.2);
 D = min(D1 .* abs(D2), D2 .* abs(D1));
 
 end

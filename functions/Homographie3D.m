@@ -1,24 +1,24 @@
 function [h] = Homographie3D(PGH, PGB, PDH, PDB, PB1, PB2, lengthX, lengthY)
 %renvoie la matrice d'homographie 3D
 
-x1 = 228; %gauche haut
-y1 = 202;
+x1 = 1; %gauche haut
+y1 = 1;
 z1 = 1;
-x2 = 24; %gauche bas
-y2 = 324;
+x2 = 1; %gauche bas
+y2 = 1080;
 z2 = 1;
-x3 = 528; % droite haut
-y3 = 343;
+x3 = 1920; % droite haut
+y3 = 1;
 z3 = 1;
-x4 = 387; % droite bas
-y4 = 451;
+x4 = 1920; % droite bas
+y4 = 1080/4;
 z4 = 1;
-x5 = 180; % cube1
-y5 = 346;
-z5 = 170;
-x6 = 226; % cube2
-y6 = 352;
-z6 = 170;
+x5 = 1920/8; % cube1
+y5 = 1080/2;
+z5 = 2;
+x6 = 1920/2; % cube2
+y6 = 1080/2;
+z6 = 3;
 
 A = [
     

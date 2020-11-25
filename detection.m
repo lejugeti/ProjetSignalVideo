@@ -87,7 +87,7 @@ end
 close(h);
 close(writer);
 
-%% test homographie3D
+%% test seuillage main
 
 clear all
 clc
@@ -100,7 +100,48 @@ PDB = Point(1428, 580);
 PB1 = Point(730, 519);
 PB2 = Point(919, 475);
 
-img = imread('eponge.jpg');
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,100);
+
+[posFeuille, X1, Y1] = PositionFeuille(frame, img, PGH, PGB, PDH, PDB);
+D = SeuillageMain(frame, posFeuille, X1, Y1);
+D = reshape(D, 1080, 1920);
+imagesc(D<20);
+%% test homographie
+
+clear all
+clc
+warning('off');
+
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(919, 475);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,1);
+
+newFrame = ReplaceFeuille(frame, img, PGH, PGB, PDH, PDB);
+imshow(newFrame);
+
+%% test homographie3D
+
+clear all
+clc
+warning('off');
+
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(993, 4);
+
+img = imread('clown.jpg');
 reader = VideoReader('video.mp4');
 frame = read(reader,1);
 h = Homographie3D(PGH, PGB, PDH, PDB, PB1, PB2, 1, 1);

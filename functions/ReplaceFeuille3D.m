@@ -19,8 +19,8 @@ h = inv(h'*h) * h';
 
 [X, Y] = meshgrid(1:1920, 1:1080); %grilles des coordonnées de la frame
 
-B = [X(:), Y(:), ones(size(X(:)))]; %permet le produit matriciel avec h pour chaque point
-C = B * h'; %transformation pour trouver vers quel pixel de l'incruste pointent ceux de la frame
+B = [X(:), Y(:), ones(size(X(:))), 2*ones(size(X(:)))]; %permet le produit matriciel avec h pour chaque point
+C = B * h; %transformation pour trouver vers quel pixel de l'incruste pointent ceux de la frame
 
 X1 = round(C(:,1)./C(:,3)); %coordonnées X transposées dans l'incruste
 Y1 = round(C(:,2)./C(:,3)); %coordonnées Y transposées dans l'incruste

@@ -16,7 +16,7 @@ B = B(posFeuille);
 
 % découpage de la feuille pour prendre un rectangle approximatif où il y a la main
 % On fait ça car on ne veut pas seuiller les cubes 
-posMain = boolean((X1 > 1480) .* (X1 <= 1920) .* (Y1 > 0) .* (Y1 <= 1080));
+posMain = boolean((X1 > 1080) .* (X1 <= 1440) .* (Y1 > 0) .* (Y1 <= 1080));
 
 %calcul du modèle colorimétrique
 mu = uint8([sum(sum(R)), sum(sum(V)), sum(sum(B))] / N);

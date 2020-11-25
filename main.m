@@ -4,9 +4,10 @@ clear all
 clc
 warning('off');
 
-img = imread('clown.jpg');
+% img = imread('clown.jpg');
 reader = VideoReader('video.mp4');
-writer = VideoWriter('new_vid_test_y');
+readerIncruste = VideoReader('incruste.mp4');
+writer = VideoWriter('new_vid');
 writer.FrameRate = reader.FrameRate;
 open(writer);
 
@@ -24,7 +25,8 @@ i = 1;
 while i < reader.NumberOfFrames + 1
 
     frame = read(reader, i); 
-
+    img = read(readerIncruste, i);
+    
     [P2GH, P1GH] = SuiviCoin(frame, P2GH, P1GH);
     [P2GB, P1GB] = SuiviCoin(frame, P2GB, P1GB);
     [P2DH, P1DH] = SuiviCoin(frame, P2DH, P1DH);
