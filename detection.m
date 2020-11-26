@@ -86,3 +86,87 @@ end
 
 close(h);
 close(writer);
+
+%% test seuillage main
+
+clear all
+clc
+warning('off');
+
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(919, 475);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,100);
+
+[posFeuille, X1, Y1] = PositionFeuille(frame, img, PGH, PGB, PDH, PDB);
+D = SeuillageMain(frame, posFeuille, X1, Y1);
+D = reshape(D, 1080, 1920);
+imagesc(D<20);
+%% test homographie
+
+clear all
+clc
+warning('off');
+
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(919, 475);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,1);
+
+newFrame = ReplaceFeuille(frame, img, PGH, PGB, PDH, PDB);
+imshow(newFrame);
+
+%% test homographie3D
+
+clear all
+clc
+warning('off');
+
+PGH = Point(685, 411);
+PGB = Point(630, 762);
+PDH = Point(1339, 238);
+PDB = Point(1428, 580);
+PB1 = Point(730, 519);
+PB2 = Point(993, 4);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,1);
+h = Homographie3D(PGH, PGB, PDH, PDB, PB1, PB2, 1, 1);
+
+[newFrame, X1, Y1] = ReplaceFeuille3D(frame, img, PGH, PGB, PDH, PDB, PB1, PB2);
+imshow(newFrame);
+
+%% test détection de coin seul 
+
+clear all
+clc
+warning('off');
+
+P1GH = Point(665, 411);
+P2GH = Point(665,411);
+P1GB = Point(630, 762);
+P2GB = Point(630, 762);
+P1DH = Point(1339, 238);
+P2DH = Point(1339, 238);
+P1DB = Point(1428, 580);
+P2DB = Point(1428, 580);
+
+img = imread('clown.jpg');
+reader = VideoReader('video.mp4');
+frame = read(reader,1);
+
+[newFrame, ] = DessineCoinRouge(frame, P1GH, P2GH);
+imshow(newFrame);
