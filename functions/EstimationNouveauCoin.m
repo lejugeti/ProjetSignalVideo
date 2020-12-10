@@ -5,7 +5,7 @@ function [ pointNouveau ] = EstimationNouveauCoin( pointActuel, pointAncien )
 % On passe en argument le couple de coordonnées [X Y] des points
 
 
-newCoord = pointActuel.Coord + (pointActuel.Coord - pointAncien.Coord) / 3;
+newCoord = pointActuel.Coord + (pointActuel.Coord - pointAncien.Coord) / 4;
 pointNouveau = Point(newCoord(1), newCoord(2));
 end
 

@@ -29,7 +29,7 @@ couleurs = double([R(:), V(:), B(:)] - mu);
 v = couleurs / sigma; %multiplication par inverse de sigma
 v = v .* couleurs; % équivalent au produit matriciel pour un pixel seul
 D = (sum(v'))'; % on somme les calculs RGB pour obtenir un critère par pixel
-seuil = D < 20;
+seuil = D < 22;
 
 % reconstruction de la position de la feuille par seuillage de la main
 % on fait une addition car le seuillage du modèle colorimétrique efface les cubes

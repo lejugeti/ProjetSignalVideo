@@ -2,7 +2,7 @@ function [ G ] = FiltreDeriveeG(coordonnee)
 % crée une filtre d'une dérivée d'une gaussienne à partir d'une grid
 % coordonnee indique s'il faut créer ce filtre en X ou en Y
 
-sigma = 2.2;
+sigma = 2.1;
 
 [X,Y] = meshgrid(-3*sigma:3*sigma);
 
